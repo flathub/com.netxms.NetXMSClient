@@ -41,7 +41,7 @@ modules:
         sha256: 604b95774f7c949e3ab0615580126b897eefd12183fe51d7b196815f3e4e0062
       - type: file
         url: https://raw.githubusercontent.com/netxms/appstream/master/4.5/com.netxms.NetXMSClient.metainfo.xml
-        sha256: 2e0786c8b85cf45fbe442cc37f6ded51c3b746b33be774d3f5c4a3c44eaa1558
+        sha256: 02f7cedc3cb754417f60d72176ac7703e2c0d4a38c2ee249489f6ac9d2f85ced
       - type: file
         url: https://raw.githubusercontent.com/netxms/appstream/master/4.5/netxms-icon.svg
         sha256: 2be6744ec2dfad5dbfd76c66eb161136bb7294736ebb053dc8f901881c5409bc
