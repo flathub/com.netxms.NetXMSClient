@@ -38,7 +38,7 @@ modules:
         path: netxms-client.sh
       - type: file
         url: https://raw.githubusercontent.com/netxms/appstream/master/4.5/com.netxms.NetXMSClient.desktop
-        sha256: 928e1f11ef1d93592295d1038dbbe61f647b839d318235112123dbbe73a512d6
+        sha256: 604b95774f7c949e3ab0615580126b897eefd12183fe51d7b196815f3e4e0062
       - type: file
         url: https://raw.githubusercontent.com/netxms/appstream/master/4.5/com.netxms.NetXMSClient.metainfo.xml
         sha256: c61764dbc3db22ccffdb7f3bddccd139d650a02008e148faeab7fb507ad6735f
