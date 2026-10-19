@@ -1,6 +1,6 @@
 app-id: com.netxms.NetXMSClient
 runtime: org.gnome.Platform
-runtime-version: "50"
+runtime-version: "51"
 sdk: org.gnome.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk17
@@ -10,39 +10,40 @@ finish-args:
   - --socket=x11
   - --share=network
   - --persist=.nxmc4
+  - --persist=.swt
 modules:
   - name: openjdk-17
     buildsystem: simple
     build-commands:
       - /usr/lib/sdk/openjdk17/install.sh
-  - name: netxms-client
+  - name: nxmc-launcher
     buildsystem: simple
     build-commands:
       - install -Dm755 netxms-client.sh /app/bin/netxms-client.sh
-      - install -Dm644 nxmc.jar /app/bin/nxmc.jar
-      - install -T -Dm644 netxms.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm644 nxmc-launcher.jar /app/bin/nxmc-launcher.jar
+      - install -T -Dm644 netxms.svg
+        /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -t /app/share/applications/ -Dm644 ${FLATPAK_ID}.desktop
       - install -t /app/share/metainfo/ -Dm644 ${FLATPAK_ID}.metainfo.xml
     sources:
       - type: file
-        url: https://netxms.org/download/releases/4.5/nxmc-4.5.7-standalone.jar
-        sha256: ac6742dd018a3b00a2d2beab659d0c8b5cf7b4431aea46a249032fb475415dfd
-        dest-filename: nxmc.jar
+        url: https://github.com/netxms/nxmc-launcher/releases/download/v1.0.0/nxmc-launcher-1.0.0-standalone.jar
+        sha256: fb69481108d3ca53a5575e569e72144a0c733b5269412ab943bfef29ac8578f9
+        dest-filename: nxmc-launcher.jar
         x-checker-data:
-          type: html
-          url: https://netxms.com/downloads/
-          version-pattern: "NetXMS Version [0-9.]+"
-          url-template: >-
-            https://netxms.com/download/releases/$major.$minor/nxmc-$version-standalone.jar
+          type: json
+          url: https://api.github.com/repos/netxms/nxmc-launcher/releases/latest
+          version-query: '.tag_name | sub("^v"; "")'
+          url-query: '.assets[] | select(.name == "nxmc-launcher-" + $version + "-standalone.jar") | .browser_download_url'
       - type: file
         path: netxms-client.sh
       - type: file
-        url: https://raw.githubusercontent.com/netxms/appstream/09750e14ca0f759999dcc936de16efcec6d7db6c/4.5/com.netxms.NetXMSClient.desktop
-        sha256: 604b95774f7c949e3ab0615580126b897eefd12183fe51d7b196815f3e4e0062
+        url: https://raw.githubusercontent.com/netxms/appstream/4fa90600563109ff77ba6c1589bce735f69a4349/launcher/com.netxms.NetXMSClient.desktop
+        sha256: 4bcdaf06ae6787cc307be367a3b520ec4340e9c66bf2976bf337390196966938
       - type: file
-        url: https://raw.githubusercontent.com/netxms/appstream/09750e14ca0f759999dcc936de16efcec6d7db6c/4.5/com.netxms.NetXMSClient.metainfo.xml
-        sha256: 56cf51ba3541a75a4a4b002d54bcb92559f49ecce020a8f1002519ff7210e95a
+        url: https://raw.githubusercontent.com/netxms/appstream/4fa90600563109ff77ba6c1589bce735f69a4349/launcher/com.netxms.NetXMSClient.metainfo.xml
+        sha256: cc93cee6eacb677821efa2a40f1ed20b0886c0f313ee1d504dec917bb6e1f172
       - type: file
-        url: https://raw.githubusercontent.com/netxms/appstream/09750e14ca0f759999dcc936de16efcec6d7db6c/4.5/netxms-icon.svg
+        url: https://raw.githubusercontent.com/netxms/appstream/4fa90600563109ff77ba6c1589bce735f69a4349/launcher/netxms-icon.svg
         sha256: 2be6744ec2dfad5dbfd76c66eb161136bb7294736ebb053dc8f901881c5409bc
         dest-filename: netxms.svg
